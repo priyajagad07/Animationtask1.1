@@ -20,3 +20,10 @@ public class CoinSpawner : MonoBehaviour
         }
     }
 }
+
+
+
+// if (Random.value > 0.5f)
+// {
+//     SpawnEnemy(newBuilding);
+// }

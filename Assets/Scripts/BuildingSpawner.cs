@@ -7,16 +7,19 @@ public class BuildingSpawner : MonoBehaviour
     public Transform player;
     public Transform lastBuilding;
     public CoinSpawner coinSpawner;
+    public FlagSpawner flagSpawner;
+    public EnemySpawner enemySpawner;
 
     public float spawnDistance = 10f;
     public float minGap = 1.2f;
     public float maxGap = 2f;
     public float destroyDitsance = 15f;
-
     public float rightEdge;
+    public float levelLength = 80f;
+    public bool levelCompleted = false;
 
     public static BuildingSpawner instance;
-    private List<GameObject> spawnedBuildings = new List<GameObject>();
+    public List<GameObject> spawnedBuildings = new List<GameObject>();
 
     void Awake()
     {
@@ -32,10 +35,19 @@ public class BuildingSpawner : MonoBehaviour
 
     public void OnPlayerLanded()
     {
-        if (player.position.x + spawnDistance > rightEdge)
+        if (levelCompleted)
+            return;
+
+        if (player.position.x + spawnDistance > rightEdge && player.position.x < levelLength)
         {
             SpawnBuilding();
             DestroyOldBuildings();
+        }
+
+        else if (player.position.x >= levelLength && !levelCompleted)
+        {
+            flagSpawner.SpawnFinishFlag();
+            levelCompleted = true;
         }
     }
 
@@ -55,8 +67,13 @@ public class BuildingSpawner : MonoBehaviour
         coinSpawner.SpawnCoins(newBuilding);
 
         spawnedBuildings.Add(newBuilding);
+
+        if(Random.value > 0.4)
+        {
+            enemySpawner.SpawnEnemey(newBuilding);
+        }
     }
-        
+
     void DestroyOldBuildings()
     {
         for (int i = 0; i < spawnedBuildings.Count; i++)
@@ -80,5 +97,5 @@ public class BuildingSpawner : MonoBehaviour
                 Debug.Log("Building Destroy");
             }
         }
-    }        
+    }
 }

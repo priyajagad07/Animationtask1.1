@@ -22,6 +22,10 @@ public class ScreenManager : MonoBehaviour
     {
         Show(ScreenType.PauseGame);
     }
+    public void ShowLevelCompleted()
+    {
+        Show(ScreenType.LevelCompleted);
+    }
 
     void Awake()
     {

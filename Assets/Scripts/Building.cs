@@ -5,6 +5,8 @@ public class Building : MonoBehaviour
     public float width;
     public float height;
     public Transform coinsParent;
+    public Transform flagPoint;
+    public Transform enemyPoint;
 
     void Awake()
     {

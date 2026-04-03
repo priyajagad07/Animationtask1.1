@@ -106,4 +106,12 @@ public class GameManager : MonoBehaviour
         Debug.Log(Time.timeScale);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void LevelCompleted()
+    {
+        Debug.Log("LEVEL COMPLETED");
+        Time.timeScale = 0f;
+
+        ScreenManager.Instance.ShowPopup(ScreenType.LevelCompleted);
+    }
 }
