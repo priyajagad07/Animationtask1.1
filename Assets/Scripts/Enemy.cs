@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float moveDistance = 2f;
-    public float speed = 2f;
+    public float moveDistance = 0.2f;
+    public float speed = 5f;
     private Vector3 startPos;
     private Animator animator;
 

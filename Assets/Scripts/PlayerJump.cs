@@ -6,10 +6,11 @@ public class PlayerJump : MonoBehaviour
     public float moveSpeed = 2f;
     public float fallThreshold = -3f;
     private Rigidbody2D rb;
+    public FixedJoystick joystick;
     private bool isGrounded;
     private int jumpCount = 0;
     public int maxJumps = 2;
-   
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,9 +18,10 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && jumpCount < maxJumps)
+        if (MobileInput.jumpPressed && jumpCount < maxJumps)
         {
             Jump();
+            MobileInput.jumpPressed = false;
         }
 
         if (transform.position.y < fallThreshold)
@@ -30,9 +32,12 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
-        float speed = GameManager.instance.currentSpeed;
-        rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
-        Debug.Log("Speed: " + speed);
+
+        //float speed = GameManager.instance.currentSpeed;
+        //rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+        float move = joystick.Horizontal * moveSpeed;
+        rb.linearVelocity = new Vector2(move, rb.linearVelocity.y);
+        Debug.Log("Speed: " + moveSpeed);
     }
 
     void Jump()

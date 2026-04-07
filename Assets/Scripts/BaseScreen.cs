@@ -3,19 +3,22 @@ using UnityEngine;
 public class BaseScreen : MonoBehaviour
 {
     private Canvas canvas;
+    private UIScreenAnimation screenAnimation;
 
     void Awake()
     {
-        canvas = GetComponentInChildren<Canvas>();
-    }
-    
-    public void Show()
-    {
-        canvas.enabled = true;
+        canvas = GetComponent<Canvas>();
+        screenAnimation = GetComponent<UIScreenAnimation>();
     }
 
-    public void Hide()
+    public virtual void Show()
+    {
+        canvas.enabled = true;
+        screenAnimation?.Show();
+    }
+
+    public virtual void Hide()
     {
         canvas.enabled = false;
     }
-}
+}   

@@ -68,7 +68,7 @@ public class BuildingSpawner : MonoBehaviour
 
         spawnedBuildings.Add(newBuilding);
 
-        if(Random.value > 0.4)
+        if(Random.value < 0.6)
         {
             enemySpawner.SpawnEnemey(newBuilding);
         }
