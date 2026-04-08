@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             GameOver(playerJump);
         }
     }
-    
+
     public void UpdateSpeed(int coins)
     {
         if (coins > 80)

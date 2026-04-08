@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.isGamePaused || GameManager.isGameOver)
+            return;
+
         float movement = Mathf.Sin(Time.time * speed) * moveDistance;
         transform.position = new Vector3(startPos.x + movement, transform.position.y, 0);
 
@@ -30,3 +33,4 @@ public class Enemy : MonoBehaviour
         }
     }
 }
+
