@@ -1,12 +1,5 @@
 fileFormatVersion: 2
-guid: 6304ad603f150b649b764d29bbc2a87b
-AssetOrigin:
-  serializedVersion: 1
-  productId: 107631
-  packageName: Joystick Pack
-  packageVersion: 2.1
-  assetPath: Assets/Joystick Pack/Sprites/Horizontal Backgrounds/Horizontal_Ridged.png
-  uploadId: 301683
+guid: 35313385ccd644e458449b5b5992b825
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

@@ -3,22 +3,50 @@ using UnityEngine;
 public class BaseScreen : MonoBehaviour
 {
     private Canvas canvas;
+    public AnimationType animationType;
+    public float duration = 0.4f;
+    public Transform target;
+
     private UIScreenAnimation screenAnimation;
 
     void Awake()
     {
-        canvas = GetComponent<Canvas>();
+        if (canvas == null)
+            canvas = GetComponent<Canvas>();
+
         screenAnimation = GetComponent<UIScreenAnimation>();
+
+        if (screenAnimation == null)
+        {
+            screenAnimation = gameObject.AddComponent<UIScreenAnimation>();
+        }
+
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+        screenAnimation.canvasGroup = canvasGroup;
+
+        if (target == null)
+        {
+            target = transform;
+        }
+
+        screenAnimation.animationType = animationType;
+        screenAnimation.duration = duration;
+        screenAnimation.target = target;
     }
 
-    public virtual void Show()
+    public void Show()
     {
         canvas.enabled = true;
-        screenAnimation?.Show();
+        screenAnimation.Show();
     }
 
-    public virtual void Hide()
+    public void Hide()
     {
         canvas.enabled = false;
     }
-}   
+}

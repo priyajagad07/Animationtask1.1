@@ -4,7 +4,7 @@ public class MobileInput : MonoBehaviour
 {
     public static bool jumpPressed = false;
 
-    public void onJumpPressed()
+    public void OnJumpPressed()
     {
         jumpPressed = true;
     }

@@ -6,7 +6,7 @@ public class PlayerJump : MonoBehaviour
     public float moveSpeed = 2f;
     public float fallThreshold = -3f;
     private Rigidbody2D rb;
-    public FixedJoystick joystick;
+    public CustomJoystick joystick;
     public Animator animator;
     private bool isGrounded;
     private int jumpCount = 0;
@@ -20,12 +20,6 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-        if (MobileInput.jumpPressed && jumpCount < maxJumps)
-        {
-            Jump();
-            MobileInput.jumpPressed = false;
-        }
-
         animator.SetFloat("yvelocity", rb.linearVelocity.y);
         animator.SetBool("isGrounded", isGrounded);
 
@@ -33,7 +27,6 @@ public class PlayerJump : MonoBehaviour
         {
             GameManager.instance.GameOver(this);
         }
-
     }
 
     void FixedUpdate()
@@ -41,11 +34,16 @@ public class PlayerJump : MonoBehaviour
         if (GameManager.isGamePaused || GameManager.isGameOver)
             return;
 
-        float move = joystick.Horizontal * moveSpeed;
+        float move = joystick.inputDIrection.x * moveSpeed;
         rb.linearVelocity = new Vector2(move, rb.linearVelocity.y);
-        Debug.Log("Speed: " + move);
 
         animator.SetFloat("speed", Mathf.Abs(rb.linearVelocity.x));
+
+        if ((MobileInput.jumpPressed || Input.GetKeyDown(KeyCode.Space)) && jumpCount < maxJumps)
+        {
+            Jump();
+            MobileInput.jumpPressed = false;
+        }
     }
 
     void Jump()
@@ -75,4 +73,3 @@ public class PlayerJump : MonoBehaviour
         }
     }
 }
-
